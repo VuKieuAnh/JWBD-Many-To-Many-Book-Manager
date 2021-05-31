@@ -57,10 +57,17 @@ public class BookService implements IBookService {
 
         //b1: ghi thong tin cua sach vao bang book
         try {
-            PreparedStatement statement1 = connection.prepareStatement(INSERT_NEW_BOOK, Statement.RETURN_GENERATED_KEYS);
+            connection.setAutoCommit(false);
+//            PreparedStatement statement1 = connection.prepareStatement(INSERT_NEW_BOOK, Statement.RETURN_GENERATED_KEYS);
+//            statement1.setString(1, p.getName());
+//            statement1.setString(2, p.getDescription());
+//            statement1.setString(3, p.getAuthor());
+            CallableStatement statement1 =
+                    connection.prepareCall("{CALL createNewBook(?, ?, ?)}");
             statement1.setString(1, p.getName());
             statement1.setString(2, p.getDescription());
             statement1.setString(3, p.getAuthor());
+
             int a1 = statement1.executeUpdate();
             //b2: lay id cua sach vua dc ghi ra
             ResultSet resultSet = statement1.getGeneratedKeys();
@@ -78,9 +85,15 @@ public class BookService implements IBookService {
                 statement.setInt(2,book_id);
                 statement.executeUpdate();
             }
+            connection.commit();
 
 
         } catch (SQLException throwables) {
+            try {
+                connection.rollback();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
             throwables.printStackTrace();
         }
 
