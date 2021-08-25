@@ -58,15 +58,15 @@ public class BookService implements IBookService {
         //b1: ghi thong tin cua sach vao bang book
         try {
             connection.setAutoCommit(false);
-//            PreparedStatement statement1 = connection.prepareStatement(INSERT_NEW_BOOK, Statement.RETURN_GENERATED_KEYS);
-//            statement1.setString(1, p.getName());
-//            statement1.setString(2, p.getDescription());
-//            statement1.setString(3, p.getAuthor());
-            CallableStatement statement1 =
-                    connection.prepareCall("{CALL createNewBook(?, ?, ?)}");
+            PreparedStatement statement1 = connection.prepareStatement(INSERT_NEW_BOOK, Statement.RETURN_GENERATED_KEYS);
             statement1.setString(1, p.getName());
             statement1.setString(2, p.getDescription());
             statement1.setString(3, p.getAuthor());
+//            CallableStatement statement1 =
+//                    connection.prepareCall("{CALL createNewBook(?, ?, ?)}");
+//            statement1.setString(1, p.getName());
+//            statement1.setString(2, p.getDescription());
+//            statement1.setString(3, p.getAuthor());
 
             int a1 = statement1.executeUpdate();
             //b2: lay id cua sach vua dc ghi ra
