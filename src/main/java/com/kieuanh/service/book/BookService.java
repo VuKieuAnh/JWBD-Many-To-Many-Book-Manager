@@ -85,7 +85,7 @@ public class BookService implements IBookService {
                 statement.setInt(2,book_id);
                 statement.executeUpdate();
             }
-            connection.commit();
+//            connection.commit();
 
 
         } catch (SQLException throwables) {

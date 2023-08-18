@@ -11,6 +11,6 @@
     <title>$Title$</title>
   </head>
   <body>
-  $END$
+   <h1>Day la trang chu</h1>
   </body>
 </html>
