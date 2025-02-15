@@ -37,7 +37,7 @@ public class BookController extends HttpServlet {
     }
 
     private void showFormCreate(HttpServletRequest req, HttpServletResponse resp) {
-        RequestDispatcher dispatcher = req.getRequestDispatcher("book/login.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("book/create.jsp");
         req.setAttribute("categories", categoryService.findAll());
         try {
             dispatcher.forward(req, resp);
